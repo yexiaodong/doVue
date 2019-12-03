@@ -1,38 +1,50 @@
-
-
 # 目录说明
-- **Site-flexbox：flexbox布局（练手） **
-- **Site-ORS：挂号门户网站（东莞移动医疗项目） **
-- **Site-ORS-WX：挂号微信公众好（东莞移动医疗项目） **
-- **Site-ORS-WX-V0.2：挂号微信公众好-第二版（东莞移动医疗项目） **
-- **Site-store：电商网站-fullPage + CSS3 实现全屏平滑切换网页（练手） **
-- **Site-pg-zjptq：湛江教育局子站 **
 
-[链接测试](http://localhost:8080/Site-flexbox/index.html)
-[链接测试2](https://github.com/momo-0902)
+## Layout 布局组件
 
-## LHeader
+::: tip
 
+- 该目录（layout）下的组件为一些基础布局组件
+- 组件前缀一般为“L”
+  :::
 
-- **Site-flexbox：flexbox布局（练手） **
-- **Site-ORS：挂号门户网站（东莞移动医疗项目） **
-- **Site-ORS-WX：挂号微信公众好（东莞移动医疗项目） **
-- **Site-ORS-WX-V0.2：挂号微信公众好-第二版（东莞移动医疗项目） **
-- **Site-store：电商网站-fullPage + CSS3 实现全屏平滑切换网页（练手） **
-- **Site-pg-zjptq：湛江教育局子站 **
-
-[链接测试](http://localhost:8080/Site-flexbox/index.html)
-[链接测试2](https://github.com/momo-0902)
 
 ### LHeader
 
+**导入**
+```js
+import LHeader from "@/components/layout/LHeader.vue";
+export default {
+  components: {
+    LHeader
+  }
+  // ...
+};
+```
 
-- **Site-flexbox：flexbox布局（练手） **
-- **Site-ORS：挂号门户网站（东莞移动医疗项目） **
-- **Site-ORS-WX：挂号微信公众好（东莞移动医疗项目） **
-- **Site-ORS-WX-V0.2：挂号微信公众好-第二版（东莞移动医疗项目） **
-- **Site-store：电商网站-fullPage + CSS3 实现全屏平滑切换网页（练手） **
-- **Site-pg-zjptq：湛江教育局子站 **
+**基本使用**
+```html
+<l-header title="详情"></l-header>
+```
 
-[链接测试](http://localhost:8080/Site-flexbox/index.html)
-[链接测试2](https://github.com/momo-0902)
+**插槽使用**
+```html
+<l-header title="">
+  <span slot="left">美丽奋斗者</span>
+  <span slot="right">
+    <router-link to="/">
+      <van-icon name="search" />
+    </router-link>
+  </span>
+</l-header>
+```
+
+**props**
+| 参数        | 说明           | 类型  | 默认值  |
+| ------------- |-------------| -----|-----|
+| title      | 标题              | String |  -  |
+| backBtn      | 是否显示返回按钮      |   Boolean |  true  |
+| fixed | vant 的header组件的布局      |    Boolean |  true  |
+
+
+### LGrid
