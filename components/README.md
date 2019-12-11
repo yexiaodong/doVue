@@ -20,9 +20,24 @@ export default {
 };
 ```
 **基本使用**
-**插槽使用**
+```html
+ <l-grid col="3" border="0" :list="girds"></l-grid>
+ ```
 **props**
-**slots**
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- |----| -----|-----|
+| list | 数据源 | Array | - |
+| col | 行数 | String | 3 |
+| border |边框记录 | String | 1 |
+**数据源例子**
+```json
+[
+    {"id":"1","fontIcon":"location","title":"我的申请","link":"/taskApplyList"},
+    {"id":"2","fontIcon":"setting","title":"我的待办","badge":"","link":"/awaitList"},
+    {"id":"3","fontIcon":"fire","title":"我的已办","link":"/taskDoneList"}
+]
+```
+fontIcon（vant的icon名称）/icon（svg图标）/img（图片） 三选一
 
 ### LHeader
 
@@ -153,4 +168,3 @@ export default {
 **插槽使用**
 **props**
 **slots**
-
