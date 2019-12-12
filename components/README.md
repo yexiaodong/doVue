@@ -191,9 +191,10 @@ export default {
 
 
 ### LListLink
-
+::: tip
+列表导航组件，图标-标题-链接
+:::
 **导入**
-
 ```js
 import LListLink from "@/components/layout/LListLink.vue";
 export default {
@@ -203,11 +204,71 @@ export default {
   // ...
 };
 ```
-
 **基本使用**
-**插槽使用**
+```html
+<l-list-link :list='list'></l-list-link>
+```
+```json
+[{
+		"id": "1",
+		"title": "库存信息",
+		"item": [{
+			"id": "2",
+			"fontIcon": "setting",
+			"title": "我的项目",
+			"link": "/baseBuilding"
+		}]
+	},
+	{
+		"id": "2",
+		"title": "信息",
+		"item": [{
+			"id": "2",
+			"fontIcon": "setting",
+			"title": "信息中心",
+			"link": "/baseBuilding"
+		}]
+	},
+	{
+		"id": "3",
+		"title": "新闻",
+		"item": [{
+				"id": "1",
+				"fontIcon": "setting",
+				"title": "新闻资讯",
+				"link": "/newsTabs"
+			},
+			{
+				"id": "2",
+				"title": "项目档案",
+				"fontIcon": "setting",
+				"link": "/newsTabs"
+			}
+		]
+	},
+	{
+		"id": "4",
+		"title": "版本说明",
+		"item": [{
+				"id": "1",
+				"fontIcon": "setting",
+				"title": "版本说明",
+				"link": "/versionDatail"
+			},
+			{
+				"id": "2",
+				"fontIcon": "setting",
+				"title": "意见反馈",
+				"link": "/versionDatail"
+			}
+		]
+	}
+]
+```
 **props**
-**slots**
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- |----| -----|:-----:|
+| list | 数据源 | Array | - |
 
 ### LSlider
 
