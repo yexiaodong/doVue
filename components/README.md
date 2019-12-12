@@ -9,7 +9,12 @@
   :::
 
 ### LGrid
+
+::: tip
+九宫格类的组件
+:::
 **导入**
+
 ```js
 import LGrid from "@/components/layout/LGrid.vue";
 export default {
@@ -19,29 +24,54 @@ export default {
   // ...
 };
 ```
+
 **基本使用**
+
 ```html
- <l-grid col="3" border="0" :list="girds"></l-grid>
- ```
+<l-grid col="3" border="0" :list="girds"></l-grid>
+```
+
 **props**
 | 参数 | 说明 | 类型 | 默认值 |
-| ---- |----| -----|-----|
+| ---- |----| -----|:-----:|
 | list | 数据源 | Array | - |
 | col | 行数 | String | 3 |
 | border |边框记录 | String | 1 |
 **数据源例子**
+
 ```json
 [
-    {"id":"1","fontIcon":"location","title":"我的申请","link":"/taskApplyList"},
-    {"id":"2","fontIcon":"setting","title":"我的待办","badge":"","link":"/awaitList"},
-    {"id":"3","fontIcon":"fire","title":"我的已办","link":"/taskDoneList"}
+  {
+    "id": "1",
+    "fontIcon": "location",
+    "title": "我的申请",
+    "link": "/taskApplyList"
+  },
+  {
+    "id": "2",
+    "fontIcon": "setting",
+    "title": "我的待办",
+    "badge": "",
+    "link": "/awaitList"
+  },
+  {
+    "id": "3",
+    "fontIcon": "fire",
+    "title": "我的已办",
+    "link": "/taskDoneList"
+  }
 ]
 ```
-fontIcon（vant的icon名称）/icon（svg图标）/img（图片） 三选一
+
+fontIcon（vant 的 icon 名称）/icon（svg 图标）/img（图片） 三选一
 
 ### LHeader
 
+::: tip
+页面头部的组件
+:::
 **导入**
+
 ```js
 import LHeader from "@/components/layout/LHeader.vue";
 export default {
@@ -73,7 +103,7 @@ export default {
 
 **props**
 | 参数 | 说明 | 类型 | 默认值 |
-| ------------- |-------------| -----|-----|
+| ------------- |-------------| -----|:-----:|
 | title | 标题 | String | - |
 | backBtn | 是否显示返回按钮 | Boolean | true |
 | fixed | vant 的 header 组件的布局 | Boolean | true |
@@ -81,13 +111,16 @@ export default {
 **slots**
 | 参数 | 说明 |
 | -----|---- |
-| left  |左侧内容 |
+| left |左侧内容 |
 | right | 右侧内容 |
 
-
-
 ### LList
+
+::: tip
+列表组件，已经封装了下拉刷新和无限滚动。
+:::
 **导入**
+
 ```js
 import LList from "@/components/layout/LList.vue";
 export default {
@@ -97,14 +130,70 @@ export default {
   // ...
 };
 ```
+
 **基本使用**
-**插槽使用**
+
+插槽：list-content，为主要的内容主体。
+```html
+<l-list ref="list" :load="onLoad" :list="list">
+  <tabs-list-item
+    slot="list-content"
+    v-for="(item,index) in list"
+    :key="index"
+    :item="item"
+  />
+</l-list>
+```
+该组件的使用重点在于onLoad方法，方法的参数是分页查询的页码。
+```js
+export default {
+  data() {
+    return {
+      list: []
+    };
+  },
+  methods: {
+    async onLoad(pageIndex) {
+      let obj = {
+        typeCode: this.columnId,
+        pageindex: pageIndex,
+        pagesize: 15
+      };
+      let data = await api.getNewsListByCode(obj);
+      if (data.code == "200") {
+        if (pageIndex == 1) {
+          this.list = data.data;
+        } else {
+          this.list = this.dox.doArrayConcat(this.list, data.data);
+        }
+      }
+      // 加载状态结束
+      this.$refs.list.loading = false;
+
+      // 数据全部加载完成
+      if (data.data.length < 15) {
+        this.$refs.list.finished = true;
+      }
+    }
+  }
+  // ...
+};
+```
 **props**
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- |----| -----|:-----:|
+| load | 获取数据的方法 | Function | - |
+| list | 数据源 | Array | - |
 **slots**
+| 参数 | 说明 |
+| -----|---- |
+| list-content | 主体内容 |
 
 
 ### LListLink
+
 **导入**
+
 ```js
 import LListLink from "@/components/layout/LListLink.vue";
 export default {
@@ -114,31 +203,16 @@ export default {
   // ...
 };
 ```
+
 **基本使用**
 **插槽使用**
 **props**
 **slots**
-
-
-### LListLink
-**导入**
-```js
-import LListLink from "@/components/layout/LListLink.vue";
-export default {
-  components: {
-    LListLink
-  }
-  // ...
-};
-```
-**基本使用**
-**插槽使用**
-**props**
-**slots**
-
 
 ### LSlider
+
 **导入**
+
 ```js
 import LSlider from "@/components/layout/LListLink.vue";
 export default {
@@ -148,13 +222,16 @@ export default {
   // ...
 };
 ```
+
 **基本使用**
 **插槽使用**
 **props**
 **slots**
 
 ### LSplash
+
 **导入**
+
 ```js
 import LSplash from "@/components/layout/LSplash.vue";
 export default {
@@ -164,6 +241,7 @@ export default {
   // ...
 };
 ```
+
 **基本使用**
 **插槽使用**
 **props**
