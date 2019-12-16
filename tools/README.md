@@ -30,6 +30,23 @@ export default{
 - 文件名称：do.js
 - 作用：全局js方法
 :::
+**引入（main.js）**
+```js
+import do_ from '@/tools/do.js';
+Vue.prototype.dox = do_;
+```
+**使用**
+```js
+this.dox.doIsNull(xxx)
+```
+**方法列表**
+| 方法名 | 说明 | 使用场景 |
+| ---- |----| -----|:-----:|
+| doIsNull | 空判断 | - | Boolen |
+| doRichTextChange | 富文本内容处理 | 富文本需要重置视频/图片路径 |
+| doArrayConcat | 数组拼接 | - |
+| doGetUpdateTime | 时间描述 | 距离当前时间的描述，如：“1周前”、“3分钟前”等描述 |
+| doUrlGetParam | 获取url参数 | - |
 
 
 ## 路由守卫
