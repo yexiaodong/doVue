@@ -54,7 +54,7 @@ this.dox.doIsNull(xxx)
 ## 路由守卫
 ::: tip
 - 文件名称：guard.js
-- 作用：vue的路由守卫
+- 作用：声明路由守卫的方法
 - 该方法js只负责声明守卫方法
 - [官网：路由守卫](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#全局前置守卫)
 :::
@@ -99,14 +99,73 @@ router.beforeEach(guard.menuClickLog)
 ## 异步请求
 ::: tip
 - 文件名称：http.js
-- 作用：全局js变量
+- 作用：封装的异步请求（可根据项目实际需求修改）
+- 注意：如果在头部添加请求参数（如：token等）会导致请求发送两次，这是浏览器机制问题，无法避免。
 :::
+**使用**
+```js
+//GET
+getListForCreater(obj){
+    return http({
+        url:'App_Interface/Repast.ashx',
+        method: 'get',
+        params:{
+            ...obj,
+        }
+    })
+},
+
+//POST
+postLogin(obj) {
+    return http({
+        url: '/api/sys/user/login',
+        method: 'post',
+        data: obj
+    })
+},
+
+//POST form-data方式
+postLogin(obj) {
+    obj = qs.stringify(obj);
+    return http({
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        url: '/api/sys/user/login',
+        method: 'post',
+        data: obj
+    })
+},
+
+//POST 站群的form-data  
+//args: {"PageNo":1,"PageSize":52,"ClassifyID":"15a47d1e-ed02-4dba-adf5-f514f955978b"}
+getColumnInfo(obj){
+    obj = {
+        args:JSON.stringify(obj)
+    }
+    return http({
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        url:'/Ashx/PostHandler.ashx?action=PotralColumn-GetColumnInfo',
+        method:'post',
+        data:qs.stringify(obj)
+    })
+},
+```
 
 ## 加密
 ::: tip
 - 文件名称：jsencrypt.js
-- 作用：全局js变量
+- 作用：登陆接口参数加密
 :::
+**使用**
+```js
+//导入
+import jsencrypt from '@/tools/jsencrypt.js'
+//使用
+jsencrypt.getData(this.user.username)
+```
 
 ## link封装
 ::: tip
