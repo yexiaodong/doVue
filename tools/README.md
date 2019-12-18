@@ -1,5 +1,7 @@
 # 工具
-
+::: tip
+工具类的js路径：src/tools
+:::
 ## JS变量
 ::: tip
 - 文件名称：config.js
@@ -53,7 +55,46 @@ this.dox.doIsNull(xxx)
 ::: tip
 - 文件名称：guard.js
 - 作用：vue的路由守卫
+- 该方法js只负责声明守卫方法
+- [官网：路由守卫](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#全局前置守卫)
 :::
+**声明**
+```js
+function currentTrain(to, form, next){
+    let obj = store.getters['train/getCurrentTrain'];
+    console.log('路由守卫，currentTrain：',obj);
+    if(obj.planId == ''){
+        next(false);
+        //Toast('用户没有进行中的培训');
+        store.dispatch("train/asyncCurrentTrain");
+    }
+    else{
+        next();
+    }
+}
+...
+export default {
+    currentTrain,
+    ...
+}
+```
+**使用（全局）**
+```js
+//全局路由守卫
+import guard from './tools/guard';
+router.beforeEach(guard.backButton)
+router.beforeEach(guard.switchSolatiumByType)
+router.beforeEach(guard.menuClickLog)
+```
+**使用（独享）**
+```js
+{
+    path: '/feedbackFormLogistic/:id',
+    name: 'feedbackFormLogistic',
+    component: () => import('./views/feedback/FormLogistic.vue'),
+    beforeEnter: guard.currentTrain
+},
+```
 
 ## 异步请求
 ::: tip
