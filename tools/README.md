@@ -170,17 +170,52 @@ jsencrypt.getData(this.user.username)
 ## link封装
 ::: tip
 - 文件名称：moblie.js
-- 作用：全局js变量
+- 作用：针对港城警务APP的特殊封装
 :::
-
+**使用（main.js）**
+```js
+//个人信息
+import { mobile } from '@/tools/mobile.js';
+mobile.init();
+```
 ## H5缓存
 ::: tip
 - 文件名称：storage.js
-- 作用：全局js变量
+- 作用：localStorage缓存封装
 :::
+**使用**
+```js
+//导入
+import { storage } from '@/tools/storage.js'
+...
+//使用
+storage.remove('user');
+```
 
 ## 表单验证
 ::: tip
 - 文件名称：veeValidate.js
-- 作用：全局js变量
+- 作用：表单验证
 :::
+具体使用可以参考霞山随手拍项目
+**导入 (main.js)**
+```js
+//表单验证
+import '@/tools/veeValidate'
+```
+**使用**
+```html
+<ValidationObserver ref="form" v-slot="{validate}">
+    <van-cell-group>
+        <ValidationProvider rules="required" name="用户名" v-slot="{ errors }">
+            <van-field placeholder="请输入用户名" left-icon="contact" v-model="user.username" :error-message="errors[0]" />
+        </ValidationProvider>
+    </van-cell-group>
+    <van-cell-group>
+        <ValidationProvider rules="required" name="密码" v-slot="{ errors }">
+            <van-field placeholder="请输入密码" type="password" left-icon="closed-eye" v-model="user.password" :error-message="errors[0]" />
+        </ValidationProvider>
+    </van-cell-group>
+</ValidationObserver>
+<van-button type="primary" @click="submit()">登陆</van-button>
+```
