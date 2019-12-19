@@ -1,9 +1,53 @@
 # 组件
+## Form 表单
+::: warning
+- 该目录（layout）下的组件为表单类的组件
+- 组件前缀一般为“F”
+  :::
+
+### FUploader 附件上传
+::: tip
+- 该组件有两个版本：Cordova版（项目管理系统），web版（霞山随手拍）
+:::
+**导入**
+```js
+import FUploader from "@/components/form/FUploader.vue";
+export default {
+  components: {
+    FUploader
+  }
+  ...
+};
+```
+**使用WEB版**
+```html
+<!-- 文件上传 -->
+<f-uploader :dataList="attrList" :after-read="afterRead" :before-delete="beforeDelete" :error="attrListError"></f-uploader>
+```
+**props**
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- |----| -----|:-----:|
+| dataList | 数据源，附件列表 | Array | - |
+| after-read | 对应vant上传组件的afterRead | Function | - |
+| before-delete | 删除附件 | Function | - |
+| error | 错误提示 | String | - |
+**使用Cordova版**
+```html 
+<f-uploader :model="applyCode" :code="applyCode+'-zhaobiaowenjian'" :task-name="taskName" remark="备注：须附合同正本扫描件，验收报告"/>
+```
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- |----| -----|:-----:|
+| model | 流程的Code | String | - |
+| code | 后台特殊要求 | String | - |
+| task-name | 流程名称 | String | - |
+| remark | 备注 | String | - |
+::: danger
+该组件基本是配合后台的上传接口开发，按后台要求调整！！！
+  :::
 
 ## Layout 布局组件
 
-::: tip
-
+::: warning
 - 该目录（layout）下的组件为一些基础布局组件
 - 组件前缀一般为“L”
   :::
