@@ -1,6 +1,7 @@
 {
     "scripts": {
       "dev": "vuepress dev .",
-      "build": "vuepress build ."
+      "build": "vuepress build .",
+      "docs:build": "vuepress build docs"
     }
   }
