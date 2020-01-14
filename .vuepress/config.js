@@ -1,5 +1,5 @@
 module.exports = {
-  base: 'doVue',//github部署路径
+  base: 'doVue',//github部署路径，本地开发和打包可移除
   title: 'doVue',
   description: 'vue 基础框架说明文档',
   themeConfig: {
